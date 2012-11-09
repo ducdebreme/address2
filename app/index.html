@@ -18,12 +18,26 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        hello
-        <ul id="address-manager"></ul>
+        <ul id="main"></ul>
+
         <script id="address-item" type="text/html">
-            <li><%= name %> <%= vorname %></li>
+            <%= name %> <%= vorname %><input type="button" id="edit" value="Edit" />
         </script>
 
+        <script id="address-item-edit" type="text/html">
+            <form>
+                <input type="text" name="name" value="<%= name %>" />
+                <input type="text" name="vorname" value="<%= vorname %>" />
+                <input type="text" name="strasse" value="<%= strasse %>" />
+                <input type="button" id="save" name="Save" value="Save" />
+            </form>
+        </script>
+
+        <script id="address-manager-view" type="text/html">
+            <ul id="address-manager"></ul>
+            <input type="button" id="new" value="New" />
+
+        </script>
 
         <!-- build:js scripts/scripts.js -->
         <script src="scripts/vendor/jquery.min.js"></script>

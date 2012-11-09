@@ -1,33 +1,43 @@
 address2.Views.addressManagerView = Backbone.View.extend({
 
-  el: '#address-manager',
+  el: '#main',
+  template: _.template( $( '#address-manager-view' ).html() ),
 
+  events: {
+    "click #new": "newAddress",
+  },
 
   initialize: function() {
-  	this.addresses = new address2.Collections.AddressesCollection();
+    this.addresses = new address2.Collections.AddressesCollection();
 
-  	// rerender the view, if collection changes
-  	this.addresses.on('add', this.render, this);
+    // rerender the view, if collection changes
+    this.addresses.on('add', this.render, this);
 
-  	// populate for debug
-	this.addresses.add([{name:"Kühn", vorname:"Stefan"}]);  	
+    // populate for debug
+    this.addresses.add([{name:"Kühn", vorname:"Stefan", strasse: "Schwarzwaldstrasse 13"}]);    
+    this.addresses.add([{name:"Kim", vorname:"Deug-Yun", strasse: "Schwarzwaldstrasse 13"}]);    
 
-  	console.log('hello from address2.Views.addressManagerView ');
-  	console.log(this);
-  	this.render();
+    console.log('hello from address2.Views.addressManagerView ');
+    console.log(this);
+    this.render();
   },
 
   render: function() {
-  	this.$el.empty();
-  	this.addresses.each( this.renderAddress, this);
+    this.$el.empty();
+    var html = this.template({});
+    this.$el.html( html);
+    this.addresses.each( this.renderAddress, this);
   },
 
   renderAddress: function(adr) {
-  	var addressItem = new address2.Views.addressView({
-  		model: adr
-  	});
-  	this.$el.append( addressItem.$el);
+    var addressItem = new address2.Views.addressView({
+      model: adr
+    });
+    this.$el.append( addressItem.$el);
+  },
 
+  newAddress: function() {
+    
   }
 
 });
