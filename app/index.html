@@ -21,14 +21,14 @@
         <ul id="main"></ul>
 
         <script id="address-item" type="text/html">
-            <%= name %> <%= vorname %><input type="button" id="edit" value="Edit" />
+            <li><%= name %> <%= vorname %><input type="button" id="edit" value="Edit" /></li>
         </script>
 
         <script id="address-item-edit" type="text/html">
             <form>
                 <input type="text" name="name" value="<%= name %>" />
                 <input type="text" name="vorname" value="<%= vorname %>" />
-                <input type="text" name="strasse" value="<%= strasse %>" />
+                <input type="text" name="strasse" value="<%= strasse %>" class="last" />
                 <input type="button" id="save" name="Save" value="Save" />
             </form>
         </script>
@@ -36,7 +36,6 @@
         <script id="address-manager-view" type="text/html">
             <ul id="address-manager"></ul>
             <input type="button" id="new" value="New" />
-
         </script>
 
         <!-- build:js scripts/scripts.js -->
@@ -48,6 +47,8 @@
         <script src="scripts/models/application-model.js"></script>
         <script src="scripts/collections/application-collection.js"></script>
         <script src="scripts/routes/application-router.js"></script>
+
+        <script src="components/Backbone.localStorage/backbone.localStorage-min.js"></script>
 
         <script src="scripts/views/address-manager-view.js"></script>
         <script src="scripts/views/address-view.js"></script>

@@ -6,7 +6,9 @@ address2.Views.addressView = Backbone.View.extend({
 
   events: {
     "click #edit": "editAddress",
+    "click li": "editAddress",
     "click #save": "saveAddress",
+    "blur .last": "saveAddress",
   },
 
   initialize: function() {
@@ -21,8 +23,12 @@ address2.Views.addressView = Backbone.View.extend({
   },
 
   render: function() {
-  	var html = this.templates.address( this.model.toJSON());
-  	this.$el.html( html);
+    if( this.model.get('mode') == 'new') {
+      this.editAddress();
+    } else {
+      var html = this.templates.address( this.model.toJSON());
+      this.$el.html( html);
+    }
   },
 
   // switch to Edit-Mode
@@ -31,15 +37,17 @@ address2.Views.addressView = Backbone.View.extend({
     this.$el.html( html);
   },
 
+  // gather the entered form data and save them into model
   saveAddress: function(e) {
     var formData = {}, changed = false;
 
-    // gather the entered form data and save them into model
     $(e.target).closest('form').find('input').each( function(){
       var el = $(this);
       formData[ el.attr("name")] = el.val();
     });
     this.model.set(formData);
+    this.model.unset('mode'); // reset mode
+    this.model.save();
   }
 
 });

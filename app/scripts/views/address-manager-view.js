@@ -14,11 +14,11 @@ address2.Views.addressManagerView = Backbone.View.extend({
     this.addresses.on('add', this.render, this);
 
     // populate for debug
-    this.addresses.add([{name:"Kühn", vorname:"Stefan", strasse: "Schwarzwaldstrasse 13"}]);    
-    this.addresses.add([{name:"Kim", vorname:"Deug-Yun", strasse: "Schwarzwaldstrasse 13"}]);    
+    //this.addresses.add([{name:"Kühn", vorname:"Stefan", strasse: "Schwarzwaldstrasse 13"}]);    
+    // this.addresses.add([{name:"Kim", vorname:"Deug-Yun", strasse: "Schwarzwaldstrasse 13"}]);    
+    this.addresses.fetch();    
 
     console.log('hello from address2.Views.addressManagerView ');
-    console.log(this);
     this.render();
   },
 
@@ -37,7 +37,10 @@ address2.Views.addressManagerView = Backbone.View.extend({
   },
 
   newAddress: function() {
-    
+    var adr = new address2.Models.AddressModel(); // create empty
+    adr.set('mode', 'new');
+    this.addresses.add( adr);
+
   }
 
 });
